@@ -1,3 +1,14 @@
+ CREATE TABLE user (
+  name VARCHAR (50) NOT NULL,
+  mail VARCHAR(50) NOT NULL PRIMARY KEY,
+  passwrd VARCHAR(500) NOT NULL,
+  datebirth DATE,
+  gender VARCHAR(1),
+  country VARCHAR(50),
+  state VARCHAR(50),
+  city VARCHAR(50)
+ );
+
 -- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
