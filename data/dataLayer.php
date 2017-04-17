@@ -34,7 +34,7 @@
                 $sql = "INSERT INTO USER VALUES ('$name', '$mail', '$userPassword', NULL, NULL, NULL, NULL, NULL)";
                 $insertSql = $conn->query($sql);
 
-                $response = array("status" => "SUCCESS", 'mail' => $mail);
+                $response = array("status" => "SUCCESS", 'mail' => $mail, 'name' => $name);
 
 				$conn -> close();
                 return $response;
@@ -45,12 +45,12 @@
 		}
 	}
 
-    function attemptLogin($userName, $rememberMe){
+    function attemptLogin($mail){
 
 		$conn = connectionToDataBase();
 
 		if ($conn != null){
-			$sql = "SELECT username, fName, lName, passwrd FROM User WHERE username = '$userName'";
+			$sql = "SELECT mail, passwrd, name FROM User WHERE mail = '$mail'";
 
 			$result = $conn->query($sql);
 
@@ -59,16 +59,16 @@
 				$conn -> close();
 
                 while($row = $result->fetch_assoc())
-		    {
-
-                if ($rememberMe == "true") {
-                    setcookie("username", $userName, time()+ (86400 * 30), "/", "", 0);
-                    //$response = array ('message' => $_COOKIE['username'], );
+                {
+                    /*
+                    if ($rememberMe == "true") {
+                        setcookie("username", $userName, time()+ (86400 * 30), "/", "", 0);
+                        //$response = array ('message' => $_COOKIE['username'], );
+                    }
+                    */
+                   $response = array("status" => "SUCCESS", "name" => $row['name'], "pass" => $row['passwrd']);
                 }
-               $response = array("status" => "SUCCESS", 'fName' => $row['fName'], 'lName' => $row['lName'], 'pass' => $row['passwrd']);
-            }
-
-				return $response;
+                return $response;
 			}
 			else{
 				$conn -> close();

@@ -6,25 +6,25 @@
     $action = $_POST["action"];
 
     switch($action){
-            case: "REGISTER" : registerFunction();
+            case "REGISTER" : registerFunction();
                 break;
-            case: "LOGIN" : loginFunction();
+            case "LOGIN" : loginFunction();
                 break;
     }
 
     function registerFunction() {
         $mail = $_POST['mail'];
-        $userPassword = $_POST['pass'];
+        $pass = $_POST['pass'];
         $name = $_POST["name"];
 
-        $passEncry = encryptFunction($userPassword);
+        $passEncry = encryptFunction($pass);
 
         $result = attemptRegister($passEncry, $mail, $name);
 
         if ($result["status"] == "SUCCESS"){
             //session_start();
             //$_SESSION['USER'] = $userName;
-            echo json_encode(array('mail' => $result["mail"]);
+            echo json_encode(array('mail' => $result["mail"], 'name' => $result["name"]));
         }
         else{
             header('HTTP/1.1 500' . $result["status"]);
@@ -50,20 +50,19 @@
     }
 
     function loginFunction(){
-        $userName = $_POST['username'];
-        $userPassword = $_POST['userPassword'];
-        $rememberMe = $_POST['rememberMe'];
+        $mail = $_POST['mail'];
+        $pass = $_POST['pass'];
 
-        $result = attemptLogin($userName, $rememberMe);
+        $result = attemptLogin($mail);
 
         if ($result["status"] == "SUCCESS"){
 
             $decrypt = decryptFunction($result["pass"]);
 
-            if ($decrypt == $userPassword) {
-                session_start();
-                $_SESSION['USER'] = $userName;
-                echo json_encode(array('fName' => $result["fName"], 'lName' => $result["lName"]));
+            if ($decrypt == $pass) {
+                //session_start();
+                //$_SESSION['USER'] = $userName;
+                echo json_encode(array('name' => $result["name"]));
             }
             else {
                 header('HTTP/1.1 500' . "INVALID CREDENTIALS");
