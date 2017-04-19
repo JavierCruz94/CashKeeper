@@ -25,6 +25,7 @@ $(document).ready(function() {
                  dataType: "json",
                  contentType: "application/x-www-form-urlencoded",
                  success: function(jsonResponse) {
+                 console.log("Datacenter nice");
                      // Load the Visualization API and the corechart package.
                   google.charts.load('current', {'packages':['corechart']});
 
@@ -62,6 +63,7 @@ $(document).ready(function() {
                     }
                  },
                  error: function(errorMessage) {
+                     console.log("Datacenter bad");
                      alert(errorMessage.responseText);
                  }
             });

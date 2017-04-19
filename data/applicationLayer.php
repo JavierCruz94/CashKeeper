@@ -163,10 +163,10 @@
         $other = attemptChartData($mail, "Other");
 
         if ($other["status"] = "SUCCESS") {
-            json_encode(array("food" => $food["amount"], "car" => $car["amount"], "living" => $living["amount"], "nightlife" => $nightlife["amount"], "kids" => $kids["amount"], "work" => $work["amount"], "other" => $other["amount"]));
+            echo json_encode(array("food" => $food["amount"], "car" => $car["amount"], "living" => $living["amount"], "nightlife" => $nightlife["amount"], "kids" => $kids["amount"], "work" => $work["amount"], "other" => $other["amount"]));
         } else {
-            header('HTTP/1.1 500' . "START A SESSION");
-            die("START A SESSION");
+            header('HTTP/1.1 500' . "BAD IN CHART");
+            die("BAD IN CHART");
         }
 
     }
