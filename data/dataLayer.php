@@ -85,7 +85,7 @@
 		$conn = connectionToDataBase();
 
 		if ($conn != null){
-                $sql = "INSERT INTO DATAENTRY VALUES ('$amount', '$expinc', '$category')";
+                $sql = "INSERT INTO DATAENTRYY VALUES (NULL, '$uid', '$amount', '$expinc', '$category')";
                 $insertSql = $conn->query($sql);
 
                 $response = array("status" => "SUCCESS", 'description' => $description, 'amount' => $amount);

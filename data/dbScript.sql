@@ -37,11 +37,10 @@ SET time_zone = "+00:00";
 -- Tabellenstruktur für Tabelle `dataentry`
 --
 
-CREATE TABLE `dataentry` (
-  `UserID` int(11) NOT NULL,
-  `amount` int(11) NOT NULL,
-  `currency` varchar(30) NOT NULL,
-  `type` tinyint(1) NOT NULL,
+CREATE TABLE `dataentryy` (
+  `UserID` varchar(30 NOT NULL,
+  `amount` varchar(30 NOT NULL,
+  `type` varchar(30 NOT NULL,
   `category` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

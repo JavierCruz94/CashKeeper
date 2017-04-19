@@ -27,7 +27,7 @@ $(document).ready(function() {
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
                         console.log("NICE");
-                       //alert("Welcome " + jsonResponse.fName + " " + jsonResponse.lName + "!");
+                       alert("Added " + jsonResponse.description + " " + jsonResponse.amount + "!");
                        //window.location.replace("home.html");
                      },
                      error: function(errorMessage) {
