@@ -35,7 +35,10 @@ $(document).ready(function() {
                 });
         });
 
-    $
+     $("#clearDataButton").on("click", function() {
+         $("#DataDescription").val("")
+         $("#DataAmount").val("");
+     });
 
 
 });
