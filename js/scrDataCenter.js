@@ -13,7 +13,6 @@ $(document).ready(function() {
                     action : "ADDDATAENTRY",
                     description : $("#DataDescription").val(),
                     amount : $("#DataAmount").val(),
-                    uid : 1,
                     expinc : $("input[name=expinc]:checked").val(),
                     category : $("#category option:selected").text()
                 }
@@ -35,6 +34,8 @@ $(document).ready(function() {
                      }
                 });
         });
+
+    $
 
 
 });

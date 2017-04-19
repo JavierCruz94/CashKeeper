@@ -112,9 +112,9 @@
         $amount = $_POST['amount'];
         $expinc = $_POST["expinc"];
         $category = $_POST["category"];
-        $uid = $_POST["uid"];
+        $mail = $_COOKIE["mail"];
 
-        $result = attemptAddData($description, $amount, $uid, $expinc, $category);
+        $result = attemptAddData($description, $amount, $mail, $expinc, $category);
 
         if ($result["status"] == "SUCCESS"){
             //session_start();
