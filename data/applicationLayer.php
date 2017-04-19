@@ -10,6 +10,8 @@
                 break;
             case "LOGIN" : loginFunction();
                 break;
+            case "ADDDATAENTRY" : addDataFunction();
+                break;
     }
 
     function registerFunction() {
@@ -102,4 +104,27 @@
         return $password;
 
     }
+
+    function addDataFunction() {
+        $description = $_POST['description'];
+        $amount = $_POST['amount'];
+        $expinc = $_POST["expinc"];
+        $category = $_POST["category"];
+        $uid = $_POST["uid"];
+
+        $result = attemptAddData($description, $amount, $uid, $expinc, $category);
+
+        if ($result["status"] == "SUCCESS"){
+            //session_start();
+            //$_SESSION['USER'] = $userName;
+            echo json_encode(array('description' => $result["description"], 'amount' => $result["amount"]));
+        }
+        else{
+            header('HTTP/1.1 500' . $result["status"]);
+            die($result["status"]);
+        }
+
+
+    }
+
 ?>

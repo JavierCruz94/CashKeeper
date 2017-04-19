@@ -38,7 +38,6 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `dataentry` (
-  `entryID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   `currency` varchar(30) NOT NULL,

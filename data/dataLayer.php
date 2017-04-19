@@ -4,7 +4,7 @@
 		$servername = "localhost";
 		$username = "root";
 		$password = "";
-		$dbname = "cashdb";
+		$dbname = "cashkeeper";
 
 		$conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -79,4 +79,24 @@
 			return array("status" => "CONNECTION WITH DB WENT WRONG");
 		}
 	}
+
+    function attemptAddData($description, $amount, $uid, $expinc, $category) {
+
+		$conn = connectionToDataBase();
+
+		if ($conn != null){
+                $sql = "INSERT INTO DATAENTRY VALUES ('$amount', '$expinc', '$category')";
+                $insertSql = $conn->query($sql);
+
+                $response = array("status" => "SUCCESS", 'description' => $description, 'amount' => $amount);
+
+				$conn -> close();
+                return $response;
+			}
+        else{
+			$conn -> close();
+			return array("status" => "CONNECTION WITH DB WENT WRONG");
+		}
+	}
+
 ?>
