@@ -24,8 +24,9 @@
         $result = attemptRegister($passEncry, $mail, $name);
 
         if ($result["status"] == "SUCCESS"){
-            //session_start();
-            //$_SESSION['USER'] = $userName;
+            session_start();
+            $_SESSION['USER'] = $mail;
+            setcookie("mail", $mail, time()+ (86400 * 30), "/", "", 0);
             echo json_encode(array('mail' => $result["mail"], 'name' => $result["name"]));
         }
         else{
@@ -62,8 +63,9 @@
             $decrypt = decryptFunction($result["pass"]);
 
             if ($decrypt == $pass) {
-                //session_start();
-                //$_SESSION['USER'] = $userName;
+                session_start();
+                $_SESSION['USER'] = $mail;
+                setcookie("mail", $mail, time()+ (86400 * 30), "/", "", 0);
                 echo json_encode(array('name' => $result["name"]));
             }
             else {

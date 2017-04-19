@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    //--------------------------------------------
+    //REGISTRATION
+    //-------------------------------------------
     $("#RegisterButton").on("click", function() {
 
         if ($("#RegisterName").val() == "" || $("#RegisterMail").val() == "" || $("#RegisterPassword").val() == "" || $("#RegisterPasswordConf").val() == "") {
@@ -22,9 +25,9 @@ $(document).ready(function() {
                      dataType: "json",
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
-                        console.log("NICE");
-                       //alert("Welcome " + jsonResponse.fName + " " + jsonResponse.lName + "!");
-                       //window.location.replace("home.html");
+                        //console.log("NICE");
+                        alert("Welcome " + jsonResponse.name + "!");
+                        window.location.replace("datacenter.html");
                      },
                      error: function(errorMessage) {
                          alert(errorMessage.responseText);
@@ -34,6 +37,9 @@ $(document).ready(function() {
         }
     });
 
+    //-----------------------------
+    //LOGIN
+    //---------------------------
     $("#LoginButton").on("click", function() {
         var jsonToSend = {
             action : "LOGIN",
@@ -48,9 +54,9 @@ $(document).ready(function() {
              dataType: "json",
              contentType: "application/x-www-form-urlencoded",
              success: function(jsonResponse) {
-                console.log("NICE log");
-               //alert("Welcome " + jsonResponse.fName + " " + jsonResponse.lName + "!");
-               //window.location.replace("home.html");
+                //console.log("NICE log");
+                alert("Welcome " + jsonResponse.name + "!");
+                window.location.replace("datacenter.html");
              },
              error: function(errorMessage) {
                  alert(errorMessage.responseText);
