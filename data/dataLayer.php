@@ -98,5 +98,22 @@
 			return array("status" => "CONNECTION WITH DB WENT WRONG");
 		}
 	}
+    function attemptChartData($mail, $category) {
+        $conn = connectionToDataBase();
+
+            if ($conn != null){
+                    $sql = "SELECT SUM(amount) AS Sum FROM dataentry WHERE category = '$category' AND mail = '$mail'";
+                    $result = $conn->query($sql)
+
+                    $response = array("status" => "SUCCESS", 'amount' => $result);
+
+                    $conn -> close();
+                    return $response;
+                }
+            else{
+                $conn -> close();
+                return array("status" => "CONNECTION WITH DB WENT WRONG");
+            }
+    }
 
 ?>
