@@ -6,12 +6,16 @@
     $action = $_POST["action"];
 
     switch($action){
-            case "REGISTER" : registerFunction();
-                break;
-            case "LOGIN" : loginFunction();
-                break;
-            case "ADDDATAENTRY" : addDataFunction();
-                break;
+        case "REGISTER" : registerFunction();
+            break;
+        case "LOGIN" : loginFunction();
+            break;
+        case "ADDDATAENTRY" : addDataFunction();
+            break;
+        case "CHECKSESSION" : checkSession();
+            break;
+        case "LOGOUT" : logoutFunction();
+            break;
     }
 
     function registerFunction() {
@@ -125,8 +129,24 @@
             header('HTTP/1.1 500' . $result["status"]);
             die($result["status"]);
         }
+    }
 
+    function checkSession() {
+        session_start();
+        if (isset($_SESSION['USER'])) {
+            echo json_encode(array('satus' => 'OK'));
+        }
+        else {
+             header('HTTP/1.1 500' . "START A SESSION");
+            die("START A SESSION");
+        }
+    }
 
+    function logoutFunction() {
+        session_start();
+        unset($_SESSION['USER']);
+        session_destroy();
+        echo json_encode(array("logout" => "LOGOUT"));
     }
 
 ?>
