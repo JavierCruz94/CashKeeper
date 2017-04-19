@@ -156,8 +156,8 @@
         $mail = $_SESSION['USER'];
         $food = attemptChartData($mail, "Food/Drinks");
         $car = attemptChartData($mail, "Car");
-        $living = = attemptChartData($mail, "House/Apartment");
-        $nightlife = = attemptChartData($mail, "Nightlife");
+        $living = attemptChartData($mail, "House/Apartment");
+        $nightlife = attemptChartData($mail, "Nightlife");
         $kids = attemptChartData($mail, "Kids");
         $work = attemptChartData($mail, "Work");
         $other = attemptChartData($mail, "Other");

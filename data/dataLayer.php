@@ -103,7 +103,7 @@
 
             if ($conn != null){
                     $sql = "SELECT SUM(amount) AS Sum FROM dataentry WHERE category = '$category' AND mail = '$mail'";
-                    $result = $conn->query($sql)
+                    $result = $conn->query($sql);
 
                     $response = array("status" => "SUCCESS", 'amount' => $result);
 
