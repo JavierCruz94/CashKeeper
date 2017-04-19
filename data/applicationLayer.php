@@ -16,6 +16,8 @@
             break;
         case "LOGOUT" : logoutFunction();
             break;
+        case "GETCHARTDATA" : getChartDataFunction();
+            break;
     }
 
     function registerFunction() {
@@ -147,6 +149,26 @@
         unset($_SESSION['USER']);
         session_destroy();
         echo json_encode(array("logout" => "LOGOUT"));
+    }
+
+    function getChartDataFunction() {
+        session_start();
+        $mail = $_SESSION['USER'];
+        $food = attemptChartData($mail, "Food/Drinks");
+        $car = attemptChartData($mail, "Car");
+        $living = = attemptChartData($mail, "House/Apartment");
+        $nightlife = = attemptChartData($mail, "Nightlife");
+        $kids = attemptChartData($mail, "Kids");
+        $work = attemptChartData($mail, "Work");
+        $other = attemptChartData($mail, "Other");
+
+        if ($other["status"] = "SUCCESS") {
+            json_encode(array("food" => $food["amount"], "car" => $car["amount"], "living" => $living["amount"], "nightlife" => $nightlife["amount"], "kids" => $kids["amount"], "work" => $work["amount"], "other" => $other["amount"]));
+        } else {
+            header('HTTP/1.1 500' . "START A SESSION");
+            die("START A SESSION");
+        }
+
     }
 
 ?>
