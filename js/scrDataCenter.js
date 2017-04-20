@@ -359,6 +359,7 @@ $(document).ready(function() {
                          alert(errorMessage.responseText);
                      }
                 });
+
                 google.charts.load("current", {packages:['corechart']});
                 google.charts.setOnLoadCallback(drawChart);
                 function drawChart() {
