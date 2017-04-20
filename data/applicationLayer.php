@@ -20,6 +20,8 @@
             break;
         case "GETENTRIES" : getEntriesFunction();
             break;
+        case "GETTOTAL" : getTotalFunction();
+            break;
     }
 
     function registerFunction() {
@@ -176,7 +178,7 @@
     function getEntriesFunction() {
         session_start();
         $mail = $_SESSION['USER'];
-        $type = $name = $_POST['type'];
+        $type = $_POST['type'];
         $category = $_POST['category'];
         if ($type == "expense") {
             $type = 0;
@@ -186,12 +188,26 @@
         $result = attemptGetEntries($mail, $type, $category);
 
         if ($result[0]["status"] = "SUCCESS") {
-                echo json_encode($result);
-            } else {
-                header('HTTP/1.1 500' . $result["status"]);
-                die($result["status"]);
-            }
+            echo json_encode($result);
+        } else {
+            header('HTTP/1.1 500' . $result["status"]);
+            die($result["status"]);
+        }
 
+    }
+
+    function getTotalFunction() {
+        session_start();
+        $mail = $_SESSION['USER'];
+        $type = $_POST['type'];
+        $result = attemptTotal($mail, $type);
+
+        if ($result["status"] = "SUCCESS") {
+            echo json_encode($result["amount"]);
+        } else {
+            header('HTTP/1.1 500' . $result["status"]);
+            die($result["status"]);
+        }
     }
 
 ?>
