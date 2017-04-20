@@ -1,4 +1,29 @@
 $(document).ready(function() {
+    //---------------------------------------
+    //DATE
+    //------------------------------------------
+
+    var d = new Date();
+    var year = d.getFullYear();
+    var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    var n = month[d.getMonth()];
+
+    console.log(year);
+
+    $("#headertitle").text("See your results for " + n + " " + year + " , check some data and compare it!");
+
     console.log($("#entryDate").val());
     //---------------------------------------------
     //DO EVERYTHING AFTER CHECKING IF SESSION OPEN
@@ -112,7 +137,7 @@ $(document).ready(function() {
                                        'height':300};
 
                         // Instantiate and draw our chart, passing in some options.
-                        var chart = new google.visualization.BarChart(document.getElementById('firstgraph'));
+                        var chart = new google.visualization.PieChart(document.getElementById('firstgraph'));
                         chart.draw(data, options);
                         }
                      },
@@ -189,14 +214,14 @@ $(document).ready(function() {
 
              //INITIAL TABLE
              loadExpenses("Food/Drinks");
-             loadIncomes("Work");
+             loadIncomes("Food/Drinks");
 
              //CAHNGING TABLE
              $("#categoryInc").change(function() {
                  loadIncomes($("#categoryInc option:selected").text());
              });
              $("#categoryExp").change(function() {
-                 loadExpenses($("#categoryExp option:selected").text());
+                 loadExpenses($("#categoryInc option:selected").text());
              });
 
 
@@ -217,7 +242,6 @@ $(document).ready(function() {
                      dataType: "json",
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
-                        $("#includeOutcome").empty();
                         $newHtml = "";
                         for (var i = 1; i < jsonResponse.length; i++) {
                             $newHtml += "<tr><td>" + jsonResponse[i].description + "</td><td>" + jsonResponse[i].amount + "</td></tr>";
@@ -249,7 +273,6 @@ $(document).ready(function() {
                      dataType: "json",
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
-                        $("#includeIncome").empty();
                         $newHtml = "";
                         for (var i = 1; i < jsonResponse.length; i++) {
                             $newHtml += "<tr><td>" + jsonResponse[i].description + "</td><td>" + jsonResponse[i].amount + "</td></tr>";
