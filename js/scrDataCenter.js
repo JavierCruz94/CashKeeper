@@ -338,8 +338,6 @@ $(document).ready(function() {
                          alert(errorMessage.responseText);
                      }
                 });
-
-<<<<<<< HEAD
              //-------------------------
              //Average
              //-------------------------
@@ -361,7 +359,6 @@ $(document).ready(function() {
                          alert(errorMessage.responseText);
                      }
                 });
-=======
                 google.charts.load("current", {packages:['corechart']});
                 google.charts.setOnLoadCallback(drawChart);
                 function drawChart() {
@@ -389,7 +386,6 @@ $(document).ready(function() {
                   var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
                   chart.draw(view, options);
               }
->>>>>>> origin/master
          },
          error: function(errorMessage) {
              alert("NEED TO START SESSION!");
