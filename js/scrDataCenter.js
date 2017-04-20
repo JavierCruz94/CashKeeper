@@ -5,6 +5,8 @@ $(document).ready(function() {
 
     var d = new Date();
     var year = d.getFullYear();
+    var m = d.getMonth() + 1;
+    var day = d.getDate();
     var month = new Array();
     month[0] = "January";
     month[1] = "February";
@@ -20,11 +22,11 @@ $(document).ready(function() {
     month[11] = "December";
     var n = month[d.getMonth()];
 
-    console.log(year);
+    var datum = year + "-" + m + "-" + day;
+    console.log(datum);
+    $("#entryDate").val(datum);
+    $("#entryDate").val(datum);
 
-    $("#headertitle").text("See your results for " + n + " " + year + " , check some data and compare it!");
-
-    console.log($("#entryDate").val());
     //---------------------------------------------
     //DO EVERYTHING AFTER CHECKING IF SESSION OPEN
     //----------------------------------------------
@@ -287,6 +289,9 @@ $(document).ready(function() {
                      }
                 });
              }
+             var totalincome = 0;
+             var totaloutcome = 0;
+
 
              //--------------------------
              //Total Income
@@ -304,6 +309,7 @@ $(document).ready(function() {
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
                         console.log(jsonResponse);
+                        totalincome = jsonResponse;
                      },
                      error: function(errorMessage) {
                          alert(errorMessage.responseText);
@@ -326,12 +332,14 @@ $(document).ready(function() {
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
                         console.log(jsonResponse);
+                        totaloutcome = jsonResponse;
                      },
                      error: function(errorMessage) {
                          alert(errorMessage.responseText);
                      }
                 });
 
+<<<<<<< HEAD
              //-------------------------
              //Average
              //-------------------------
@@ -353,6 +361,35 @@ $(document).ready(function() {
                          alert(errorMessage.responseText);
                      }
                 });
+=======
+                google.charts.load("current", {packages:['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+                  var data = google.visualization.arrayToDataTable([
+                    ["Type of Cash Flow", "Amount", { role: "style" } ],
+                    ["Income", totalincome, "#89bdd3"],
+                    ["Outcome", totaloutcome, "color: #e5e4e2"]
+                  ]);
+
+                  var view = new google.visualization.DataView(data);
+                  view.setColumns([0, 1,
+                                   { calc: "stringify",
+                                     sourceColumn: 1,
+                                     type: "string",
+                                     role: "annotation" },
+                                   2]);
+
+                  var options = {
+                    title: "Income Outcome Comparison",
+                    width: 600,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
+                    legend: { position: "none" },
+                  };
+                  var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                  chart.draw(view, options);
+              }
+>>>>>>> origin/master
          },
          error: function(errorMessage) {
              alert("NEED TO START SESSION!");
