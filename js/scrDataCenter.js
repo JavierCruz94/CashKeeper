@@ -189,14 +189,14 @@ $(document).ready(function() {
 
              //INITIAL TABLE
              loadExpenses("Food/Drinks");
-             loadIncomes("Food/Drinks");
+             loadIncomes("Work");
 
              //CAHNGING TABLE
              $("#categoryInc").change(function() {
                  loadIncomes($("#categoryInc option:selected").text());
              });
              $("#categoryExp").change(function() {
-                 loadExpenses($("#categoryInc option:selected").text());
+                 loadExpenses($("#categoryExp option:selected").text());
              });
 
 
@@ -217,6 +217,7 @@ $(document).ready(function() {
                      dataType: "json",
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
+                        $("#includeOutcome").empty();
                         $newHtml = "";
                         for (var i = 1; i < jsonResponse.length; i++) {
                             $newHtml += "<tr><td>" + jsonResponse[i].description + "</td><td>" + jsonResponse[i].amount + "</td></tr>";
@@ -248,6 +249,7 @@ $(document).ready(function() {
                      dataType: "json",
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
+                        $("#includeIncome").empty();
                         $newHtml = "";
                         for (var i = 1; i < jsonResponse.length; i++) {
                             $newHtml += "<tr><td>" + jsonResponse[i].description + "</td><td>" + jsonResponse[i].amount + "</td></tr>";

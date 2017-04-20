@@ -102,19 +102,21 @@
         $conn = connectionToDataBase();
 
         if ($conn != null){
-                $sql = "SELECT SUM(amount) AS Sum FROM dataentry WHERE category = '$category' AND mail = '$mail' AND type = '$type'";
-                $result = $conn->query($sql);
+            $date = getdate();
+            $month = $date['mon'];
+            $sql = "SELECT SUM(amount) AS Sum FROM dataentry WHERE category = '$category' AND mail = '$mail' AND type = '$type' AND MONTH(dateEntry) = '$month'";
+            $result = $conn->query($sql);
 
-                if ($result->num_rows > 0)
+            if ($result->num_rows > 0)
+            {
+                $conn -> close();
+
+                while($row = $result->fetch_assoc())
                 {
-                    $conn -> close();
-
-                    while($row = $result->fetch_assoc())
-                    {
-                       $response = array("status" => "SUCCESS", 'amount' => intval($row['Sum']));
-                    }
+                   $response = array("status" => "SUCCESS", 'amount' => intval($row['Sum']));
                 }
-                return $response;
+            }
+            return $response;
             }
         else{
             $conn -> close();
@@ -126,7 +128,9 @@
         $conn = connectionToDataBase();
 
         if ($conn != null){
-            $sql = "SELECT description, amount FROM dataentry WHERE category = '$category' AND mail = '$mail' AND type = '$type'";
+            $date = getdate();
+            $month = $date['mon'];
+            $sql = "SELECT description, amount FROM dataentry WHERE category = '$category' AND mail = '$mail' AND type = '$type' AND MONTH(dateEntry) = '$month'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0){
                 $conn -> close();
