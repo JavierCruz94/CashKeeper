@@ -184,7 +184,7 @@ function getEntriesFunction() {
     }
     $result = attemptGetEntries($mail, $type, $category);
 
-    if ($result["status"] = "SUCCESS") {
+    if ($result[0]["status"] = "SUCCESS") {
             echo json_encode($result);
         } else {
             header('HTTP/1.1 500' . $result["status"]);
