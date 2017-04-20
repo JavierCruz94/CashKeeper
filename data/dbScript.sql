@@ -18,6 +18,5 @@ CREATE DATABASE cashkeeper;
     category varchar(50) NOT NULL,
     entryId int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     description varchar(250),
-    dateEntry date,
     FOREIGN KEY(mail) REFERENCES cashkeeper.user(mail)
  );
