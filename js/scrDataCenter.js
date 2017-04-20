@@ -42,7 +42,7 @@ $(document).ready(function() {
                     // Create the data table.
                     var data = new google.visualization.DataTable();
                     data.addColumn('string', 'Category');
-                    data.addColumn('number', 'Money');
+                    data.addColumn('number', 'Expenses');
                     var test = 150;
                     data.addRows([
                       ['Food/Drinks', jsonResponse.food],
