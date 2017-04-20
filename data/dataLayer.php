@@ -178,4 +178,30 @@
         }
     }
 
+    function attemptAverage($category) {
+        $conn = connectionToDataBase();
+
+        if ($conn != null){
+            $date = getdate();
+            $month = $date['mon'];
+            $sql = "SELECT AVG(amount) AS Total FROM dataentry WHERE category = '$category' AND type = 0 AND MONTH(dateEntry) = '$month'";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0)
+            {
+                $conn -> close();
+
+                while($row = $result->fetch_assoc())
+                {
+                   $response = array("status" => "SUCCESS", 'amount' => intval($row['Total']));
+                }
+            }
+            return $response;
+            }
+        else{
+            $conn -> close();
+            return array("status" => "CONNECTION WITH DB WENT WRONG");
+        }
+    }
+
 ?>

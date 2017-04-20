@@ -22,6 +22,8 @@
             break;
         case "GETTOTAL" : getTotalFunction();
             break;
+        case "GETAVG" : getAvgfFunction();
+            break;
     }
 
     function registerFunction() {
@@ -201,6 +203,18 @@
         $mail = $_SESSION['USER'];
         $type = $_POST['type'];
         $result = attemptTotal($mail, $type);
+
+        if ($result["status"] = "SUCCESS") {
+            echo json_encode($result["amount"]);
+        } else {
+            header('HTTP/1.1 500' . $result["status"]);
+            die($result["status"]);
+        }
+    }
+
+    function getAvgfFunction() {
+        $category = $_POST['category'];
+        $result = attemptAverage($category);
 
         if ($result["status"] = "SUCCESS") {
             echo json_encode($result["amount"]);
