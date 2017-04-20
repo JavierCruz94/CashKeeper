@@ -25,7 +25,7 @@ $(document).ready(function() {
     var datum = year + "-" + m + "-" + day;
     console.log(datum);
     $("#entryDate").val(datum);
-    $("#entryDate").val(datum);
+    $("#headertitle").text("See your results for " + n + " " + year + " and compare your results.");
 
     //---------------------------------------------
     //DO EVERYTHING AFTER CHECKING IF SESSION OPEN
@@ -354,6 +354,9 @@ $(document).ready(function() {
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
                         console.log("Avg=" + jsonResponse);
+                        var averageText = "The average costs of Food and Drink is " + jsonResponse + "! How about yours?";
+                        $("#average").append(averageText);
+
                      },
                      error: function(errorMessage) {
                          alert(errorMessage.responseText);

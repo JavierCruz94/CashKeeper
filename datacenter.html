@@ -77,11 +77,15 @@
 
             <ul class="pure-menu-list">
                 <li class="pure-menu-item"><a href="#" class="pure-menu-link">Dashboard</a></li>
-                <li class="pure-menu-item"><a href="#total" class="pure-menu-link">Total Month</a></li>
-
-                <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
+                 <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
                     <a href="#addButton" class="pure-menu-link">Insert</a>
                 </li>
+                <li class="pure-menu-item"><a href="#yourdata" class="pure-menu-link">Your Data</a></li>
+                <li class="pure-menu-item"><a href="#comparison" class="pure-menu-link">Comparison</a></li>
+                <li class="pure-menu-item"><a href="#total" class="pure-menu-link">Total Month</a></li>
+
+
+
                 <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
                     <a href="#" class="pure-menu-link" id="logout">Logout</a>
                 </li>
@@ -122,11 +126,11 @@
             </form>
 
 
-            <h2 class="content-subhead">Your data</h2>
+            <h2 id="yourdata" class="content-subhead">Your data</h2>
              <p id="firstgraph">
             </p>
 
-            <h2 class="content-subhead">Compare your expenses and income to see how to save money!</h2>
+            <h2 id="comparison" class="content-subhead">Compare your expenses and income to see how to save money!</h2>
             <div class="pure-g">
                 <div class="pure-u-1-2">
                     <h3 class="content-subhead">Income
@@ -178,9 +182,10 @@
                 </div>
             </div>
 
+            <h1 id="average" class="content-subhead"></h1>
+
             <h2 id="total" class="content-subhead">Total Income and Outcome for this Month</h2>
             <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
-
         </div>
     </div>
 </div>
