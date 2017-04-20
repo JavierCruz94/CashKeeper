@@ -139,7 +139,7 @@
                    $response = array('amount' => $row['amount'], 'description' => $row['description']);
                    array_push($entries, $response);
                 }
-                return $response;
+                return $entries;
             }
         }
         else{

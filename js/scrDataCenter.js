@@ -216,10 +216,9 @@ $(document).ready(function() {
                      dataType: "json",
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
-
                         $newHtml = "";
-                        for ($i = 1; $i < jsonResponse.length; i++) {
-                        $newHtml += "<tr><td>" + jsonResponse[i].description + "<\td><td>" + jsonResponse[i].amount + "</td></tr>";
+                        for (var i = 1; i < jsonResponse.length; i++) {
+                            $newHtml += "<tr><td>" + jsonResponse[i].description + "</td><td>" + jsonResponse[i].amount + "</td></tr>";
                         }
 
                         $("#includeOutcome").append($newHtml);
@@ -248,7 +247,12 @@ $(document).ready(function() {
                      dataType: "json",
                      contentType: "application/x-www-form-urlencoded",
                      success: function(jsonResponse) {
-                            //Insert things into table
+                        $newHtml = "";
+                        for (var i = 1; i < jsonResponse.length; i++) {
+                            $newHtml += "<tr><td>" + jsonResponse[i].description + "</td><td>" + jsonResponse[i].amount + "</td></tr>";
+                        }
+
+                        $("#includeIncome").append($newHtml);
                      },
                      error: function(errorMessage) {
                          alert(errorMessage.responseText);
