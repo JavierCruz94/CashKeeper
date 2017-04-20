@@ -80,12 +80,12 @@
 		}
 	}
 
-    function attemptAddData($description, $amount, $mail, $expinc, $category) {
+    function attemptAddData($description, $amount, $mail, $expinc, $category, $date) {
 
 		$conn = connectionToDataBase();
 
 		if ($conn != null){
-                $sql = "INSERT INTO DATAENTRY VALUES ( '$mail', '$amount', '$expinc', '$category', NULL, '$description')";
+                $sql = "INSERT INTO DATAENTRY VALUES ( '$mail', '$amount', '$expinc', '$category', NULL, '$description', '$date')";
                 $insertSql = $conn->query($sql);
 
                 $response = array("status" => "SUCCESS", 'description' => $description, 'amount' => $amount);

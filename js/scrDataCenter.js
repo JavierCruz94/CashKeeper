@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+    console.log($("#entryDate").val());
     //---------------------------------------------
     //DO EVERYTHING AFTER CHECKING IF SESSION OPEN
     //----------------------------------------------
@@ -137,7 +137,8 @@ $(document).ready(function() {
                             description : $("#DataDescription").val(),
                             amount : $("#DataAmount").val(),
                             expinc : $("input[name=expinc]:checked").val(),
-                            category : $("#category option:selected").text()
+                            category : $("#category option:selected").text(),
+                            date : $("#entryDate").val()
                         }
                         console.log("NICE");
 
