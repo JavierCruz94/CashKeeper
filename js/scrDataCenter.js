@@ -286,6 +286,49 @@ $(document).ready(function() {
                 });
              }
 
+             //--------------------------
+             //Total Income
+             //---------------------------
+             var jsonToSend = {
+                 action : "GETTOTAL",
+                 type : 1
+                }
+
+                $.ajax({
+                     url: "data/applicationLayer.php",
+                     type: "POST",
+                     data: jsonToSend,
+                     dataType: "json",
+                     contentType: "application/x-www-form-urlencoded",
+                     success: function(jsonResponse) {
+                        console.log(jsonResponse);
+                     },
+                     error: function(errorMessage) {
+                         alert(errorMessage.responseText);
+                     }
+                });
+
+             //--------------------------
+             //Total OUTCOME
+             //---------------------------
+             var jsonToSend = {
+                 action : "GETTOTAL",
+                 type : 0
+                }
+
+                $.ajax({
+                     url: "data/applicationLayer.php",
+                     type: "POST",
+                     data: jsonToSend,
+                     dataType: "json",
+                     contentType: "application/x-www-form-urlencoded",
+                     success: function(jsonResponse) {
+                        console.log(jsonResponse);
+                     },
+                     error: function(errorMessage) {
+                         alert(errorMessage.responseText);
+                     }
+                });
          },
          error: function(errorMessage) {
              alert("NEED TO START SESSION!");
