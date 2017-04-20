@@ -13,7 +13,9 @@ $(document).ready(function() {
          dataType: "json",
          contentType: "application/x-www-form-urlencoded",
          success: function(jsonResponse) {
+             //---------------------
             //Chart loading
+             //-----------------
 
             var jsonToSend = {
             action : "GETCHARTDATA"

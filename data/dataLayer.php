@@ -102,12 +102,18 @@
         $conn = connectionToDataBase();
 
             if ($conn != null){
-                    $sql = "SELECT SUM(amount) AS Sum FROM dataentry WHERE category = '$category' AND mail = '$mail'";
+                    $sql = "SELECT SUM(amount) AS Sum FROM dataentry WHERE category = '$category' AND mail = '$mail' AND type = 0";
                     $result = $conn->query($sql);
 
-                    $response = array("status" => "SUCCESS", 'amount' => $result);
+                    if ($result->num_rows > 0)
+                    {
+                        $conn -> close();
 
-                    $conn -> close();
+                        while($row = $result->fetch_assoc())
+                        {
+                           $response = array("status" => "SUCCESS", 'amount' => intval($row['Sum']));
+                        }
+                    }
                     return $response;
                 }
             else{
