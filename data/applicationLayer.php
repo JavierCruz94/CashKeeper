@@ -154,13 +154,13 @@
     function getChartDataFunction() {
         session_start();
         $mail = $_SESSION['USER'];
-        $food = attemptChartData($mail, "Food/Drinks");
-        $car = attemptChartData($mail, "Car");
-        $living = attemptChartData($mail, "House/Apartment");
-        $nightlife = attemptChartData($mail, "Nightlife");
-        $kids = attemptChartData($mail, "Kids");
-        $work = attemptChartData($mail, "Work");
-        $other = attemptChartData($mail, "Other");
+        $food = attemptChartData($mail, "Food/Drinks", 0);
+        $car = attemptChartData($mail, "Car", 0);
+        $living = attemptChartData($mail, "House/Apartment", 0);
+        $nightlife = attemptChartData($mail, "Nightlife", 0);
+        $kids = attemptChartData($mail, "Kids", 0);
+        $work = attemptChartData($mail, "Work", 0);
+        $other = attemptChartData($mail, "Other", 0);
 
         if ($other["status"] = "SUCCESS") {
             echo json_encode(array("food" => $food["amount"], "car" => $car["amount"], "living" => $living["amount"], "nightlife" => $nightlife["amount"], "kids" => $kids["amount"], "work" => $work["amount"], "other" => $other["amount"]));
