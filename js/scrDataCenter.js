@@ -218,11 +218,11 @@ $(document).ready(function() {
                      success: function(jsonResponse) {
 
                         $newHtml = "";
-                        for ($i = 1, $i < jsonResponse.length; i++) {
+                        for ($i = 1; $i < jsonResponse.length; i++) {
                         $newHtml += "<tr><td>" + jsonResponse[i].description + "<\td><td>" + jsonResponse[i].amount + "</td></tr>";
                         }
 
-                        $("#expenseSummary").append($newHtml);
+                        $("#includeOutcome").append($newHtml);
 
                      },
                      error: function(errorMessage) {
