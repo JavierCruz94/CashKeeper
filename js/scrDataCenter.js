@@ -16,60 +16,61 @@ $(document).ready(function() {
              //---------------------
             //Chart loading
              //-----------------
+            loadChart();
+            function loadChart() {
+                var jsonToSend = {
+                action : "GETCHARTDATA"
+                }
+                $.ajax({
+                     url: "data/applicationLayer.php",
+                     type: "POST",
+                     data: jsonToSend,
+                     dataType: "json",
+                     contentType: "application/x-www-form-urlencoded",
+                     success: function(jsonResponse) {
+                     console.log("Datacenter nice");
+                         // Load the Visualization API and the corechart package.
+                      google.charts.load('current', {'packages':['corechart']});
 
-            var jsonToSend = {
-            action : "GETCHARTDATA"
-        }
-            $.ajax({
-                 url: "data/applicationLayer.php",
-                 type: "POST",
-                 data: jsonToSend,
-                 dataType: "json",
-                 contentType: "application/x-www-form-urlencoded",
-                 success: function(jsonResponse) {
-                 console.log("Datacenter nice");
-                     // Load the Visualization API and the corechart package.
-                  google.charts.load('current', {'packages':['corechart']});
+                      // Set a callback to run when the Google Visualization API is loaded.
+                      google.charts.setOnLoadCallback(drawChart);
 
-                  // Set a callback to run when the Google Visualization API is loaded.
-                  google.charts.setOnLoadCallback(drawChart);
+                      // Callback that creates and populates a data table,
+                      // instantiates the pie chart, passes in the data and
+                      // draws it.
+                      function drawChart() {
 
-                  // Callback that creates and populates a data table,
-                  // instantiates the pie chart, passes in the data and
-                  // draws it.
-                  function drawChart() {
+                        // Create the data table.
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Category');
+                        data.addColumn('number', 'Money');
+                        var test = 150;
+                        data.addRows([
+                          ['Food/Drinks', jsonResponse.food],
+                          ['Car', jsonResponse.car],
+                          ['Living', jsonResponse.living],
+                          ['Nightlife', jsonResponse.nightlife],
+                          ['Kids', jsonResponse.kids],
+                          ['Work', jsonResponse.work],
+                          ['Other', jsonResponse.other]
+                        ]);
 
-                    // Create the data table.
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Category');
-                    data.addColumn('number', 'Money');
-                    var test = 150;
-                    data.addRows([
-                      ['Food/Drinks', jsonResponse.food],
-                      ['Car', jsonResponse.car],
-                      ['Living', jsonResponse.living],
-                      ['Nightlife', jsonResponse.nightlife],
-                      ['Kids', jsonResponse.kids],
-                      ['Work', jsonResponse.work],
-                      ['Other', jsonResponse.other]
-                    ]);
+                        // Set chart options
+                        var options = {'title':'How Much Did I spend this Month?',
+                                       'width':600,
+                                       'height':300};
 
-                    // Set chart options
-                    var options = {'title':'How Much Did I spend this Month?',
-                                   'width':600,
-                                   'height':300};
-
-                    // Instantiate and draw our chart, passing in some options.
-                    var chart = new google.visualization.BarChart(document.getElementById('firstgraph'));
-                    chart.draw(data, options);
-                    }
-                 },
-                 error: function(errorMessage) {
-                     console.log("Datacenter bad");
-                     alert(errorMessage.responseText);
-                 }
-            });
-
+                        // Instantiate and draw our chart, passing in some options.
+                        var chart = new google.visualization.BarChart(document.getElementById('firstgraph'));
+                        chart.draw(data, options);
+                        }
+                     },
+                     error: function(errorMessage) {
+                         console.log("Datacenter bad");
+                         alert(errorMessage.responseText);
+                     }
+                });
+             }
             console.log("File loaded");
             $("#addForm").hide();
 
@@ -97,7 +98,8 @@ $(document).ready(function() {
                              contentType: "application/x-www-form-urlencoded",
                              success: function(jsonResponse) {
                                 console.log("NICE");
-                               alert("Added " + jsonResponse.description + " " + jsonResponse.amount + "!");
+                                alert("Added " + jsonResponse.description + " " + jsonResponse.amount + "!");
+                                loadChart();
                                //window.location.replace("home.html");
                              },
                              error: function(errorMessage) {
@@ -132,6 +134,69 @@ $(document).ready(function() {
                      }
                 });
              });
+
+             //INITIAL TABLE
+             loadExpenses("Food/Drinks");
+             loadIncomes("Food/Drinks");
+
+             //CAHNGING TABLE
+             $("#categoryInc").change(function() {
+                 loadIncomes($("#categoryInc option:selected").text());
+             });
+             $("#categoryExp").change(function() {
+                 loadExpenses($("#categoryInc option:selected").text());
+             });
+
+
+             //---------------------------------
+             //OUTCOME ENTRIES
+             //---------------------------------
+             function loadExpenses ($category) {
+                var jsonToSend = {
+                 action : "GETENTRIES",
+                 type : "expense",
+                 category : $category
+                }
+
+                $.ajax({
+                     url: "data/applicationLayer.php",
+                     type: "POST",
+                     data: jsonToSend,
+                     dataType: "json",
+                     contentType: "application/x-www-form-urlencoded",
+                     success: function(jsonResponse) {
+                            //Insert things into table
+                     },
+                     error: function(errorMessage) {
+                         alert(errorMessage.responseText);
+                     }
+                });
+             }
+
+             //---------------------------------
+             //INCOME ENTRIES
+             //---------------------------------
+             function loadIncomes ($category) {
+                var jsonToSend = {
+                 action : "GETENTRIES",
+                 type : "income",
+                 category : $category
+                }
+
+                $.ajax({
+                     url: "data/applicationLayer.php",
+                     type: "POST",
+                     data: jsonToSend,
+                     dataType: "json",
+                     contentType: "application/x-www-form-urlencoded",
+                     success: function(jsonResponse) {
+                            //Insert things into table
+                     },
+                     error: function(errorMessage) {
+                         alert(errorMessage.responseText);
+                     }
+                });
+             }
 
          },
          error: function(errorMessage) {

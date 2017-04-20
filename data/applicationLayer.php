@@ -18,6 +18,8 @@
             break;
         case "GETCHARTDATA" : getChartDataFunction();
             break;
+        case "GETENTRIES" : getEntriesFunction();
+            break;
     }
 
     function registerFunction() {
@@ -168,7 +170,27 @@
             header('HTTP/1.1 500' . "BAD IN CHART");
             die("BAD IN CHART");
         }
-
     }
+
+function getEntriesFunction() {
+    session_start();
+    $mail = $_SESSION['USER'];
+    $type = $name = $_POST["type"];
+    $category = $_POST["category"];
+    if ($type == "expense") {
+        $type = 0;
+    } else {
+        $type = 1;
+    }
+    $result = attemptGetEntries($mail, $type, $category);
+
+    if ($result["status"] = "SUCCESS") {
+            echo json_encode($result);
+        } else {
+            header('HTTP/1.1 500' . $result["status"]);
+            die($result["status"]);
+        }
+
+}
 
 ?>

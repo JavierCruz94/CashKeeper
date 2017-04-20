@@ -101,25 +101,51 @@
     function attemptChartData($mail, $category, $type) {
         $conn = connectionToDataBase();
 
-            if ($conn != null){
-                    $sql = "SELECT SUM(amount) AS Sum FROM dataentry WHERE category = '$category' AND mail = '$mail' AND type = '$type'";
-                    $result = $conn->query($sql);
+        if ($conn != null){
+                $sql = "SELECT SUM(amount) AS Sum FROM dataentry WHERE category = '$category' AND mail = '$mail' AND type = '$type'";
+                $result = $conn->query($sql);
 
-                    if ($result->num_rows > 0)
+                if ($result->num_rows > 0)
+                {
+                    $conn -> close();
+
+                    while($row = $result->fetch_assoc())
                     {
-                        $conn -> close();
-
-                        while($row = $result->fetch_assoc())
-                        {
-                           $response = array("status" => "SUCCESS", 'amount' => intval($row['Sum']));
-                        }
+                       $response = array("status" => "SUCCESS", 'amount' => intval($row['Sum']));
                     }
-                    return $response;
                 }
-            else{
-                $conn -> close();
-                return array("status" => "CONNECTION WITH DB WENT WRONG");
+                return $response;
             }
+        else{
+            $conn -> close();
+            return array("status" => "CONNECTION WITH DB WENT WRONG");
+        }
+    }
+
+    function attemptGetEntries($mail, $type, $category) {
+        $conn = connectionToDataBase();
+
+        if ($conn != null){
+            $sql = "SELECT description, amount FROM dataentry WHERE category = '$category' AND mail = '$mail' AND type = '$type'";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0){
+                $conn -> close();
+
+                $entries = array();
+                $response = array("status" => "SUCCESS");
+                array_push($entries, $response);
+
+                while($row = $result->fetch_assoc()) {
+                   $response = array('amount' => $row['amount'], description => $row['description']);
+                   array_push($entries, $response);
+                }
+            }
+            return $response;
+        }
+        else{
+            $conn -> close();
+            return array("status" => "CONNECTION WITH DB WENT WRONG");
+        }
     }
 
 ?>
