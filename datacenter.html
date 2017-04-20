@@ -77,13 +77,11 @@
 
             <ul class="pure-menu-list">
                 <li class="pure-menu-item"><a href="#" class="pure-menu-link">Dashboard</a></li>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Data Center</a></li>
+                <li class="pure-menu-item"><a href="#total" class="pure-menu-link">Total Month</a></li>
 
                 <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
-                    <a href="#" class="pure-menu-link">Insert</a>
+                    <a href="#addButton" class="pure-menu-link">Insert</a>
                 </li>
-
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
                 <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
                     <a href="#" class="pure-menu-link" id="logout">Logout</a>
                 </li>
@@ -180,10 +178,9 @@
                 </div>
             </div>
 
-            <h2 class="content-subhead">Try Resizing your Browser</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <h2 id="total" class="content-subhead">Total Income and Outcome for this Month</h2>
+            <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+
         </div>
     </div>
 </div>
@@ -192,37 +189,7 @@
 
 
 <script src="js/ui.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-    google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Type of Cash Flow", "Amount", { role: "style" } ],
-        ["Income", 12000, "#89bdd3"],
-        ["Outcome", 10000, "color: #e5e4e2"]
-      ]);
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
-
-      var options = {
-        title: "Income Outcome Comparison",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-      chart.draw(view, options);
-  }
-  </script>
-<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
 
 </body>
 </html>
