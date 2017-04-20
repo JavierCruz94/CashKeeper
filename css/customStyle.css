@@ -33,3 +33,8 @@
   color: rgba(255,255,255,1);
   background: rgb(137,189,211);
 }
+
+.table-head {
+    background-color: #89bdd3;
+    color: white;
+}
