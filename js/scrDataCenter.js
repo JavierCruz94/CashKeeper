@@ -106,7 +106,7 @@ $(document).ready(function() {
                                                'height':300};
 
                                 // Instantiate and draw our chart, passing in some options.
-                                var chart = new google.visualization.BarChart(document.getElementById('firstgraph'));
+                                var chart = new google.visualization.PieChart(document.getElementById('firstgraph'));
                                 chart.draw(data, options);
                                 }
                              },
