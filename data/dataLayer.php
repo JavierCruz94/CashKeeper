@@ -136,11 +136,11 @@
                 array_push($entries, $response);
 
                 while($row = $result->fetch_assoc()) {
-                   $response = array('amount' => $row['amount'], description => $row['description']);
+                   $response = array('amount' => $row['amount'], 'description' => $row['description']);
                    array_push($entries, $response);
                 }
+                return $response;
             }
-            return $response;
         }
         else{
             $conn -> close();

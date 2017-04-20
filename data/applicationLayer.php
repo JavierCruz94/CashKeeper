@@ -175,8 +175,8 @@
 function getEntriesFunction() {
     session_start();
     $mail = $_SESSION['USER'];
-    $type = $name = $_POST["type"];
-    $category = $_POST["category"];
+    $type = $name = $_POST['type'];
+    $category = $_POST['category'];
     if ($type == "expense") {
         $type = 0;
     } else {
