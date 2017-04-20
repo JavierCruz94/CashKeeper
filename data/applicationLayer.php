@@ -121,8 +121,9 @@
         $expinc = $_POST["expinc"];
         $category = $_POST["category"];
         $mail = $_COOKIE["mail"];
+        $date = $_POST["date"];
 
-        $result = attemptAddData($description, $amount, $mail, $expinc, $category);
+        $result = attemptAddData($description, $amount, $mail, $expinc, $category, $date);
 
         if ($result["status"] == "SUCCESS"){
             //session_start();
