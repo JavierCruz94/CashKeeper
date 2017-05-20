@@ -120,11 +120,12 @@
     }
 
     function addDataFunction() {
+        session_start();
         $description = $_POST['description'];
         $amount = $_POST['amount'];
         $expinc = $_POST["expinc"];
         $category = $_POST["category"];
-        $mail = $_COOKIE["mail"];
+        $mail = $_SESSION['USER'];
         $date = $_POST["date"];
 
         $result = attemptAddData($description, $amount, $mail, $expinc, $category, $date);
